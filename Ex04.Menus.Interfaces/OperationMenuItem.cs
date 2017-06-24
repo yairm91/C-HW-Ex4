@@ -1,26 +1,32 @@
-﻿using System;
-
-namespace Ex4.Menus.Interfaces
+﻿namespace Ex04.Menus.Interfaces
 {
     public class OperationMenuItem : MenuItem
     {
-        public event Action<string> Selected;
+        private IAction m_ActionListener;
+
+        public IAction ActionListener
+        {
+            set
+            {
+                if (m_ActionListener == null)
+                {
+                    m_ActionListener = value;
+                }   
+            }
+        }
 
         public OperationMenuItem(string i_MenuItemName) : base(i_MenuItemName)
         {
         }
 
-        private void OnSelected()
+        private void notifyListener()
         {
-            if (Selected != null)
-            {
-                Selected.Invoke(MenuName);
-            }
+            m_ActionListener.ReportAction(MenuName);
         }
 
         public override void Activate()
         {
-            OnSelected();
+            notifyListener();
         }
     }
 }

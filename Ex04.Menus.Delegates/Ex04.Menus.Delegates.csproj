@@ -7,8 +7,8 @@
     <ProjectGuid>{A588981E-BB4E-4073-B0E8-FE193FAD8EDE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ex4.Menus.Delegates</RootNamespace>
-    <AssemblyName>Ex4.Menus.Delegates</AssemblyName>
+    <RootNamespace>Ex04.Menus.Delegates</RootNamespace>
+    <AssemblyName>Ex04.Menus.Delegates</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

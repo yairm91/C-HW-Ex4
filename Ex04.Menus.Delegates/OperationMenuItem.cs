@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace Ex4.Menus.Delegates
+namespace Ex04.Menus.Delegates
 {
     public class OperationMenuItem : MenuItem
     {
-        public event Action<string> Selected;
+        public event Action<OperationMenuItem> Selected;
 
         public OperationMenuItem(string i_MenuItemName) : base(i_MenuItemName)
         {
@@ -14,7 +14,7 @@ namespace Ex4.Menus.Delegates
         {
             if(Selected != null)
             {
-                Selected.Invoke(MenuName);
+                Selected.Invoke(this);
             }
         }
 

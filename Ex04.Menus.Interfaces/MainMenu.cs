@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Ex4.Menus.Interfaces
+namespace Ex04.Menus.Interfaces
 {
     public class MainMenu : MenuItem
     {
@@ -16,7 +16,7 @@ namespace Ex4.Menus.Interfaces
         private const string k_BackMenu = "0. Back";
         private const string k_MenuItemTemplate = "{0}. {1}";
         private const string k_WrongInputString = "Wrong Input! Must be an integer between {0} and {1}, please try again";
-        private const string k_UserChoiceQuestionString = "Please enter your choice ({0}-{1} or 0 to {2}";
+        private const string k_UserChoiceQuestionString = "Please enter your choice ({0}-{1}) or 0 to {2}";
         private List<MenuItem> m_MenuItems;
         private MainMenu m_PreviousMenu = null;
 
@@ -36,7 +36,7 @@ namespace Ex4.Menus.Interfaces
         public MainMenu(string i_MenuItemName, List<MenuItem> i_MenuItems) : base(i_MenuItemName)
         {
             m_MenuItems = i_MenuItems;
-            int itemIndex = 0;
+            int itemIndex = 1;
             foreach (MenuItem menuItem in m_MenuItems)
             {
                 menuItem.ItemIndex = itemIndex;
@@ -52,13 +52,13 @@ namespace Ex4.Menus.Interfaces
 
         public void Show()
         {
-            Console.Clear();
             if (m_PreviousMenu == null)
             {
                 writeFirstMenu();
             }
             else
             {
+                Console.Clear();
                 writeRegularMenu();
             }
 
@@ -68,7 +68,23 @@ namespace Ex4.Menus.Interfaces
 
         private void navigateToNextItem(int i_IndexOfOption)
         {
-            m_MenuItems[i_IndexOfOption].Activate();
+            if (i_IndexOfOption == 0)
+            {
+                exitOrGoBackInMenu();
+            }
+            else
+            {
+                m_MenuItems[i_IndexOfOption - 1].Activate();
+            }
+        }
+
+        private void exitOrGoBackInMenu()
+        {
+            if (m_PreviousMenu != null)
+            {
+                Console.Clear();
+                m_PreviousMenu.Show();
+            }
         }
 
         private int getAnswerFromUser()

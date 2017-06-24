@@ -1,4 +1,4 @@
-﻿namespace Ex4.Menus.Delegates
+﻿namespace Ex04.Menus.Delegates
 {
     public abstract class MenuItem
     {

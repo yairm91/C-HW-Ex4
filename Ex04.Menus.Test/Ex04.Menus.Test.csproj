@@ -32,14 +32,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ex4.Menus.Delegates\Ex04.Menus.Delegates.csproj">
+    <ProjectReference Include="..\Ex04.Menus.Delegates\Ex04.Menus.Delegates.csproj">
       <Project>{a588981e-bb4e-4073-b0e8-fe193fad8ede}</Project>
       <Name>Ex04.Menus.Delegates</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Ex4.Menus.Interfaces\Ex04.Menus.Interfaces.csproj">
+    <ProjectReference Include="..\Ex04.Menus.Interfaces\Ex04.Menus.Interfaces.csproj">
       <Project>{0ab5bfde-f13b-4ad2-9d55-afbaf9a4184b}</Project>
       <Name>Ex04.Menus.Interfaces</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="TestApplicationDelegates.cs" />
+    <Compile Include="TestApplicationInterface.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
