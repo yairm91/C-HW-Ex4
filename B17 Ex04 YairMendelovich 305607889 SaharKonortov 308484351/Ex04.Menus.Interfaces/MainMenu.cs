@@ -18,6 +18,20 @@ namespace Ex04.Menus.Interfaces
         private const string k_WrongInputString = "Wrong Input! Must be an integer between {0} and {1}, please try again";
         private const string k_UserChoiceQuestionString = "Please enter your choice ({0}-{1}) or 0 to {2}";
         private List<MenuItem> m_MenuItems;
+        private MainMenu m_PreviousMenu = null;
+
+        public MainMenu PreviousMenu
+        {
+            get
+            {
+                return m_PreviousMenu;
+            }
+
+            set
+            {
+                m_PreviousMenu = value;
+            }
+        }
 
         public MainMenu(string i_MenuItemName, List<MenuItem> i_MenuItems) : base(i_MenuItemName)
         {
@@ -26,7 +40,11 @@ namespace Ex04.Menus.Interfaces
             foreach (MenuItem menuItem in m_MenuItems)
             {
                 menuItem.ItemIndex = itemIndex;
-                menuItem.PreviousMenu = this;
+                MainMenu menuItemAsMainMenu = menuItem as MainMenu;
+                if (menuItemAsMainMenu != null)
+                {
+                    menuItemAsMainMenu.PreviousMenu = this;
+                }
 
                 itemIndex++;
             }
@@ -34,7 +52,7 @@ namespace Ex04.Menus.Interfaces
 
         public void Show()
         {
-            if (PreviousMenu == null)
+            if (m_PreviousMenu == null)
             {
                 writeFirstMenu();
             }
@@ -62,10 +80,10 @@ namespace Ex04.Menus.Interfaces
 
         private void exitOrGoBackInMenu()
         {
-            if (PreviousMenu != null)
+            if (m_PreviousMenu != null)
             {
                 Console.Clear();
-                PreviousMenu.Show();
+                m_PreviousMenu.Show();
             }
         }
 

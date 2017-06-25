@@ -1,4 +1,4 @@
-﻿namespace Ex04.Menus.Delegates
+﻿namespace Ex04.Menus.Interfaces
 {
     public abstract class MenuItem
     {
@@ -23,21 +23,6 @@
             set
             {
                 m_ItemIndex = value;
-            }
-        }
-
-        private MainMenu m_PreviousMenu = null;
-
-        public MainMenu PreviousMenu
-        {
-            get
-            {
-                return m_PreviousMenu;
-            }
-
-            set
-            {
-                m_PreviousMenu = value;
             }
         }
 

@@ -57,8 +57,10 @@ namespace Ex04.Menus.Test
 
         private void showTimeMenuItem()
         {
+            Console.Clear();
             string timeToPrint = DateTime.Now.ToShortTimeString();
             Console.WriteLine(timeToPrint);
+            Show();
         }
 
         private List<MenuItem> createActionsAndInfoMenusItems()
@@ -93,17 +95,22 @@ namespace Ex04.Menus.Test
 
         private void showDateMenuItem()
         {
+            Console.Clear();
             string dateToPrint = DateTime.Now.ToShortDateString();
             Console.WriteLine(dateToPrint);
+            Show();
         }
 
         private void showVersionMenuItem()
         {
+            Console.Clear();
             Console.WriteLine(k_AppVersion);
+            Show();
         }
 
         private void countSpacesMenuItem()
         {
+            Console.Clear();
             Console.WriteLine("Please enter a sentence");
 
             string sentence = Console.ReadLine();
@@ -117,10 +124,13 @@ namespace Ex04.Menus.Test
             }
 
             Console.WriteLine(string.Format("There is {0} spaces in the string.", counterOfSpaces));
+
+            Show();
         }
 
         private void charCountMenuItem()
         {
+            Console.Clear();
             Console.WriteLine("Please enter a sentence");
             string sentence = Console.ReadLine();
             int counterOfLetters = 0;
@@ -133,6 +143,8 @@ namespace Ex04.Menus.Test
             }
 
             Console.WriteLine(string.Format("There is {0} letters in the string.", counterOfLetters));
+
+            Show();
         }
 
         public void Show()

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Ex04.Menus.Delegates;
+using Ex04.Menus.Delegate;
 
 namespace Ex04.Menus.Test
 {
@@ -45,22 +46,20 @@ namespace Ex04.Menus.Test
             List<MenuItem> listOfMenus = new List<MenuItem>();
 
             OperationMenuItem showDateMenuItem = new OperationMenuItem(k_ShowDateMenuName);
-            showDateMenuItem.Selected += new Action<OperationMenuItem>(showDateMenuItem_Select);
+            showDateMenuItem.Selected += showDateMenuItem_Select;
             listOfMenus.Add(showDateMenuItem);
 
             OperationMenuItem showTimeMenuItem = new OperationMenuItem(k_ShowTimeMenuName);
-            showTimeMenuItem.Selected += new Action<OperationMenuItem>(showTimeMenuItem_Select);
+            showTimeMenuItem.Selected += showTimeMenuItem_Select;
             listOfMenus.Add(showTimeMenuItem);
 
             return listOfMenus;
         }
 
-        private void showTimeMenuItem_Select(OperationMenuItem i_CurrentOperation)
+        private void showTimeMenuItem_Select()
         {
-            Console.Clear();
             string timeToPrint = DateTime.Now.ToShortTimeString();
             Console.WriteLine(timeToPrint);
-            Show();
         }
 
         private List<MenuItem> createActionsAndInfoMenusItems()
@@ -68,7 +67,7 @@ namespace Ex04.Menus.Test
             List<MenuItem> listOfMenus = new List<MenuItem>();
 
             OperationMenuItem displayMenuItem = new OperationMenuItem(k_DisplayVersionMenuName);
-            displayMenuItem.Selected += new Action<OperationMenuItem>(showVersionMenuItem_Select);
+            displayMenuItem.Selected += showVersionMenuItem_Select;
             listOfMenus.Add(displayMenuItem);
 
             List<MenuItem> actionsMenusItems = createActionsMenusItems();
@@ -83,34 +82,29 @@ namespace Ex04.Menus.Test
             List<MenuItem> listOfMenus = new List<MenuItem>();
 
             OperationMenuItem countSpaces = new OperationMenuItem(k_CountSpacesMenuName);
-            countSpaces.Selected += new Action<OperationMenuItem>(countSpacesMenuItem_Select);
+            countSpaces.Selected += countSpacesMenuItem_Select;
             listOfMenus.Add(countSpaces);
 
             OperationMenuItem charCount = new OperationMenuItem(k_CharCountMenuName);
-            charCount.Selected += new Action<OperationMenuItem>(charCountMenuItem_Select);
+            charCount.Selected += charCountMenuItem_Select;
             listOfMenus.Add(charCount);
 
             return listOfMenus;
         }
 
-        private void showDateMenuItem_Select(OperationMenuItem i_CurrentOperation)
+        private void showDateMenuItem_Select()
         {
-            Console.Clear();
             string dateToPrint = DateTime.Now.ToShortDateString();
             Console.WriteLine(dateToPrint);
-            Show();
         }
 
-        private void showVersionMenuItem_Select(OperationMenuItem i_CurrentOperation)
+        private void showVersionMenuItem_Select()
         {
-            Console.Clear();
             Console.WriteLine(k_AppVersion);
-            Show();
         }
 
-        private void countSpacesMenuItem_Select(OperationMenuItem i_CurrentOperation)
+        private void countSpacesMenuItem_Select()
         {
-            Console.Clear();
             Console.WriteLine("Please enter a sentence");
 
             string sentence = Console.ReadLine();
@@ -124,13 +118,10 @@ namespace Ex04.Menus.Test
             }
 
             Console.WriteLine(string.Format("There is {0} spaces in the string.", counterOfSpaces));
-
-            Show();
         }
 
-        private void charCountMenuItem_Select(OperationMenuItem i_CurrentOperation)
+        private void charCountMenuItem_Select()
         {
-            Console.Clear();
             Console.WriteLine("Please enter a sentence");
             string sentence = Console.ReadLine();
             int counterOfLetters = 0;
@@ -143,8 +134,6 @@ namespace Ex04.Menus.Test
             }
 
             Console.WriteLine(string.Format("There is {0} letters in the string.", counterOfLetters));
-
-            Show();
         }
 
         public void Show()

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Ex04.Menus.Interfaces;
+using Ex04.Menus.Delegates;
 
 namespace Ex04.Menus.Test
 {
-    internal class TestApplicationInterface : IAction
+    internal class TestApplicationDelegates
     {
         private const string k_MainMenuName = "Main Menu";
         private const string k_ActionsAndInfoMenuName = "Actions and Info";
@@ -19,10 +19,10 @@ namespace Ex04.Menus.Test
 
         private MainMenu m_MainMenu;
 
-        public TestApplicationInterface()
+        public TestApplicationDelegates()
         {
             List<MenuItem> listOfMenus = createListOfMenus();
-            m_MainMenu = new MainMenu(k_MainMenuName, listOfMenus);
+            m_MainMenu = new MainMenu(k_MainMenuName, listOfMenus);         
         }
 
         private List<MenuItem> createListOfMenus()
@@ -45,20 +45,22 @@ namespace Ex04.Menus.Test
             List<MenuItem> listOfMenus = new List<MenuItem>();
 
             OperationMenuItem showDateMenuItem = new OperationMenuItem(k_ShowDateMenuName);
-            showDateMenuItem.ActionListener = this;
+            showDateMenuItem.Selected += new Action<OperationMenuItem>(showDateMenuItem_Select);
             listOfMenus.Add(showDateMenuItem);
 
             OperationMenuItem showTimeMenuItem = new OperationMenuItem(k_ShowTimeMenuName);
-            showTimeMenuItem.ActionListener = this;
+            showTimeMenuItem.Selected += new Action<OperationMenuItem>(showTimeMenuItem_Select);
             listOfMenus.Add(showTimeMenuItem);
 
             return listOfMenus;
         }
 
-        private void showTimeMenuItem()
+        private void showTimeMenuItem_Select(OperationMenuItem i_CurrentOperation)
         {
+            Console.Clear();
             string timeToPrint = DateTime.Now.ToShortTimeString();
             Console.WriteLine(timeToPrint);
+            Show();
         }
 
         private List<MenuItem> createActionsAndInfoMenusItems()
@@ -66,7 +68,7 @@ namespace Ex04.Menus.Test
             List<MenuItem> listOfMenus = new List<MenuItem>();
 
             OperationMenuItem displayMenuItem = new OperationMenuItem(k_DisplayVersionMenuName);
-            displayMenuItem.ActionListener = this;
+            displayMenuItem.Selected += new Action<OperationMenuItem>(showVersionMenuItem_Select);
             listOfMenus.Add(displayMenuItem);
 
             List<MenuItem> actionsMenusItems = createActionsMenusItems();
@@ -81,29 +83,34 @@ namespace Ex04.Menus.Test
             List<MenuItem> listOfMenus = new List<MenuItem>();
 
             OperationMenuItem countSpaces = new OperationMenuItem(k_CountSpacesMenuName);
-            countSpaces.ActionListener = this;
+            countSpaces.Selected += new Action<OperationMenuItem>(countSpacesMenuItem_Select);
             listOfMenus.Add(countSpaces);
 
             OperationMenuItem charCount = new OperationMenuItem(k_CharCountMenuName);
-            charCount.ActionListener = this;
+            charCount.Selected += new Action<OperationMenuItem>(charCountMenuItem_Select);
             listOfMenus.Add(charCount);
 
             return listOfMenus;
         }
 
-        private void showDateMenuItem()
+        private void showDateMenuItem_Select(OperationMenuItem i_CurrentOperation)
         {
+            Console.Clear();
             string dateToPrint = DateTime.Now.ToShortDateString();
             Console.WriteLine(dateToPrint);
+            Show();
         }
 
-        private void showVersionMenuItem()
+        private void showVersionMenuItem_Select(OperationMenuItem i_CurrentOperation)
         {
+            Console.Clear();
             Console.WriteLine(k_AppVersion);
+            Show();
         }
 
-        private void countSpacesMenuItem()
+        private void countSpacesMenuItem_Select(OperationMenuItem i_CurrentOperation)
         {
+            Console.Clear();
             Console.WriteLine("Please enter a sentence");
 
             string sentence = Console.ReadLine();
@@ -117,10 +124,13 @@ namespace Ex04.Menus.Test
             }
 
             Console.WriteLine(string.Format("There is {0} spaces in the string.", counterOfSpaces));
+
+            Show();
         }
 
-        private void charCountMenuItem()
+        private void charCountMenuItem_Select(OperationMenuItem i_CurrentOperation)
         {
+            Console.Clear();
             Console.WriteLine("Please enter a sentence");
             string sentence = Console.ReadLine();
             int counterOfLetters = 0;
@@ -133,35 +143,13 @@ namespace Ex04.Menus.Test
             }
 
             Console.WriteLine(string.Format("There is {0} letters in the string.", counterOfLetters));
+
+            Show();
         }
 
         public void Show()
         {
             m_MainMenu.Show();
-        }
-
-        public void ReportAction(string i_NameOfAction)
-        {
-            if (i_NameOfAction.Equals(k_DisplayVersionMenuName))
-            {
-                showVersionMenuItem();
-            }
-            else if (i_NameOfAction.Equals(k_ShowDateMenuName))
-            {
-                showDateMenuItem();
-            }
-            else if (i_NameOfAction.Equals(k_ShowTimeMenuName))
-            {
-                showTimeMenuItem();
-            }
-            else if (i_NameOfAction.Equals(k_CountSpacesMenuName))
-            {
-                countSpacesMenuItem();
-            }
-            else if (i_NameOfAction.Equals(k_CharCountMenuName))
-            {
-                charCountMenuItem();
-            }
         }
     }
 }

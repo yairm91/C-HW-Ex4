@@ -26,21 +26,6 @@
             }
         }
 
-        private MainMenu m_PreviousMenu = null;
-
-        public MainMenu PreviousMenu
-        {
-            get
-            {
-                return m_PreviousMenu;
-            }
-
-            set
-            {
-                m_PreviousMenu = value;
-            }
-        }
-
         public MenuItem(string i_MenuItemName)
         {
             m_MenuItemName = i_MenuItemName;

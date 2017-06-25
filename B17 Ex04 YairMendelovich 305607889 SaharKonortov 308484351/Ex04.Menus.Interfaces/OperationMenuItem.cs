@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Ex04.Menus.Interfaces
+﻿namespace Ex04.Menus.Interfaces
 {
     public class OperationMenuItem : MenuItem
     {
@@ -28,11 +26,7 @@ namespace Ex04.Menus.Interfaces
 
         public override void Activate()
         {
-            Console.Clear();
             notifyListener();
-            Console.WriteLine("Press any key to continue");
-            Console.ReadLine();
-            PreviousMenu.Show(); 
         }
     }
 }

@@ -1,13 +1,10 @@
 ﻿using System;
-using Ex04.Menus.Delegates;
 
-namespace Ex04.Menus.Delegate
+namespace Ex04.Menus.Delegates
 {
-    public delegate void MenuItemDelegate();
-
     public class OperationMenuItem : MenuItem
     {
-        public event MenuItemDelegate Selected;
+        public event Action<OperationMenuItem> Selected;
 
         public OperationMenuItem(string i_MenuItemName) : base(i_MenuItemName)
         {
@@ -16,18 +13,14 @@ namespace Ex04.Menus.Delegate
         private void OnSelected()
         {
             if(Selected != null)
-            { 
-                Selected.Invoke();
+            {
+                Selected.Invoke(this);
             }
         }
 
         public override void Activate()
         {
-            Console.Clear();
             OnSelected();
-            Console.WriteLine("Press any key to continue");
-            Console.ReadLine();
-            PreviousMenu.Show();
         }
     }
 }
